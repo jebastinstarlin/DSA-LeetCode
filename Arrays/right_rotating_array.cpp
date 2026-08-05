@@ -2,21 +2,25 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
-    k %= n;
+        k %= n;
 
-    int temp[k];
+        if (k == 0) return;
 
-    // Store last k elements
-    for (int i = 0; i < k; i++)
-        temp[i] = nums[n - k + i];
+        vector<int> temp(k);
 
-    // Shift elements right
-    for (int i = n - k - 1; i >= 0; i--)
-        nums[i + k] = nums[i];
+        // Store last k elements
+        for (int i = 0; i < k; i++) {
+            temp[i] = nums[n - k + i];
+        }
 
-    // Copy temp to beginning
-    for (int i = 0; i < k; i++)
-        nums[i] = temp[i];
-        
+        // Shift remaining elements to the right
+        for (int i = n - k - 1; i >= 0; i--) {
+            nums[i + k] = nums[i];
+        }
+
+        // Copy temp to beginning
+        for (int i = 0; i < k; i++) {
+            nums[i] = temp[i];
+        }
     }
 };
